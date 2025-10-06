@@ -1,6 +1,16 @@
 import { config } from 'dotenv';
+import { readFileSync } from 'fs';
+import { join, dirname } from 'path';
+import { fileURLToPath } from 'url';
 
 config();
+
+// Read version from package.json
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const packageJsonPath = join(__dirname, '../../package.json');
+const packageJson = JSON.parse(readFileSync(packageJsonPath, 'utf-8'));
+const AGENT_VERSION = packageJson.version;
 
 /**
  * Base environment configuration for TheRevio agents
@@ -43,8 +53,8 @@ export const BASE_ENV: BaseEnv = {
   BACKEND_URL: process.env.BACKEND_URL || 'ws://localhost:3001',
   API_KEY: process.env.THEREVIO_API_KEY || '',
 
-  // Agent metadata (will be overridden by package.json version)
-  AGENT_VERSION: '1.0.0',
+  // Agent metadata (read from package.json at build time)
+  AGENT_VERSION,
 
   // Repository path
   REPO_PATH: process.env.REPO_PATH || process.cwd(),

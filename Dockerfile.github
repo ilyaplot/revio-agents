@@ -15,14 +15,14 @@ COPY tsconfig.json ./
 # Install dependencies
 RUN npm install
 
+# Update version in package.json BEFORE build
+RUN sed -i "s/\"version\": \".*\"/\"version\": \"${VERSION}\"/" package.json
+
 # Copy source code
 COPY src ./src
 
-# Build the application
+# Build the application (env.ts reads version from package.json)
 RUN npm run build
-
-# Update version in package.json
-RUN sed -i "s/\"version\": \".*\"/\"version\": \"${VERSION}\"/" package.json
 
 # Production stage
 FROM node:20-alpine
