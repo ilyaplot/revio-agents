@@ -68,6 +68,16 @@ export const BASE_ENV: BaseEnv = {
   // Modes
   FAIL_SAFE: process.env.FAIL_SAFE === 'true',
   DEBUG: process.env.DEBUG === '1' || process.env.DEBUG === 'true',
+
+  // Bitbucket Pipelines environment variables
+  BITBUCKET_WORKSPACE: process.env.BITBUCKET_WORKSPACE,
+  BITBUCKET_REPO_SLUG: process.env.BITBUCKET_REPO_SLUG,
+  BITBUCKET_REPO_OWNER: process.env.BITBUCKET_REPO_OWNER,
+  BITBUCKET_PR_ID: process.env.BITBUCKET_PR_ID,
+  BITBUCKET_COMMIT: process.env.BITBUCKET_COMMIT,
+  BITBUCKET_BRANCH: process.env.BITBUCKET_BRANCH,
+  BITBUCKET_PR_DESTINATION_BRANCH: process.env.BITBUCKET_PR_DESTINATION_BRANCH,
+  BITBUCKET_GIT_HTTP_ORIGIN: process.env.BITBUCKET_GIT_HTTP_ORIGIN,
 };
 
 // For backward compatibility - services expect ENV
