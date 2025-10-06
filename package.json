@@ -7,6 +7,7 @@
     "build": "tsc",
     "build:github": "tsc && echo 'Built GitHub agent'",
     "build:bitbucket": "tsc && echo 'Built Bitbucket agent'",
+    "start": "node dist/index-bitbucket.js",
     "start:github": "node dist/index-github.js",
     "start:bitbucket": "node dist/index-bitbucket.js",
     "dev:github": "npm run build && node dist/index-github.js",
