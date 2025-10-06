@@ -1,0 +1,46 @@
+# Build stage
+FROM node:20-alpine AS builder
+
+ARG VERSION=dev
+
+WORKDIR /app
+
+# Install build dependencies
+RUN apk add --no-cache git
+
+# Copy package files
+COPY package*.json ./
+COPY tsconfig.json ./
+
+# Install dependencies
+RUN npm install
+
+# Copy source code
+COPY src ./src
+
+# Build the application
+RUN npm run build
+
+# Update version in package.json
+RUN sed -i "s/\"version\": \".*\"/\"version\": \"${VERSION}\"/" package.json
+
+# Production stage
+FROM node:20-alpine
+
+WORKDIR /app
+
+# Install runtime dependencies
+RUN apk add --no-cache git curl
+
+# Copy package.json from builder
+COPY --from=builder /app/package*.json ./
+
+# Copy node_modules from builder
+COPY --from=builder /app/node_modules ./node_modules
+
+# Copy built application from builder
+COPY --from=builder /app/dist ./dist
+
+ENV NODE_ENV=production
+
+ENTRYPOINT ["node", "dist/index-bitbucket.js"]

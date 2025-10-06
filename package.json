@@ -1,0 +1,41 @@
+{
+  "name": "@therevio/agents",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "TheRevio agents for GitHub Actions and Bitbucket Pipelines",
+  "scripts": {
+    "build": "tsc",
+    "build:github": "tsc && echo 'Built GitHub agent'",
+    "build:bitbucket": "tsc && echo 'Built Bitbucket agent'",
+    "start:github": "node dist/index-github.js",
+    "start:bitbucket": "node dist/index-bitbucket.js",
+    "dev:github": "npm run build && node dist/index-github.js",
+    "dev:bitbucket": "npm run build && node dist/index-bitbucket.js",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "keywords": [
+    "code-review",
+    "github",
+    "github-actions",
+    "bitbucket",
+    "bitbucket-pipelines",
+    "ci-cd",
+    "ai"
+  ],
+  "author": "TheRevio",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "glob": "^10.3.10",
+    "http-proxy-agent": "^7.0.0",
+    "simple-git": "^3.25.0",
+    "socket.io-client": "^4.7.4"
+  },
+  "devDependencies": {
+    "@types/node": "^24.3.0",
+    "@vitest/ui": "^3.2.4",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
+  }
+}
