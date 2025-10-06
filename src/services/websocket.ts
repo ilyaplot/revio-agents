@@ -142,7 +142,10 @@ export class WebSocketService {
         console.error('❌ Agent error from backend:');
         console.error(`   Error: ${data.error}`);
         console.error(`   ${data.message}`);
-        reject(new Error(data.error));
+        // Call critical error callback to terminate the process
+        if (this.criticalErrorCallback) {
+          this.criticalErrorCallback(data.error);
+        }
       });
     });
   }
