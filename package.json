@@ -1,6 +1,6 @@
 {
   "name": "@therevio/agents",
-  "version": "1.0.0",
+  "version": "4.0.1",
   "type": "module",
   "description": "TheRevio agents for GitHub Actions and Bitbucket Pipelines",
   "scripts": {
